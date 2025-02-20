@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- Project information -->
+	<groupId>crif</groupId>
+	<artifactId>aml-services</artifactId>
+	<version>${revision}</version>
+	<name>Parent</name>
+	<packaging>pom</packaging>
+
+	<!-- List module -->
+	<modules>
+		<module>aml-shared-services-impl</module>
+		<module>aml-job-services-impl</module>
+		<module>aml-business-services-impl</module>
+		<module>aml-esb</module>
+	</modules>
+
+	<!-- List properties -->
+	<properties>
+		<revision>0.0.1-SNAPSHOT</revision>
+
+		<java.version>17</java.version>
+		<charset.code>ISO-8859-1</charset.code>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<project.build.sourceEncoding>${charset.code}</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${charset.code}</project.reporting.outputEncoding>
+		<maxMemory>768M</maxMemory>
+		<jvmArgSettings>-XX:MaxMetaspaceSize=512M</jvmArgSettings>
+
+		<jcommander.version>1.48</jcommander.version>
+		<commons-logging.version>1.1.1</commons-logging.version>
+		<testng.version>6.9.10</testng.version>
+		<hsqldb.version>2.4</hsqldb.version>
+
+		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<cxf-codegen-plugin.version>4.1.0</cxf-codegen-plugin.version>
+		<maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+		<maven-checkstyle-plugin.version>3.6.0</maven-checkstyle-plugin.version>
+		<jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+		<maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
+		<maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+		<maven-surefire-report-plugin.version>3.3.1</maven-surefire-report-plugin.version>
+	</properties>
+
+	<!-- Dependency version manage -->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.beust</groupId>
+				<artifactId>jcommander</artifactId>
+				<version>${jcommander.version}</version>
+				<scope>system</scope>
+				<systemPath>${env.DEVTOOLS}\ofwup-testing\lib\jcommander-1.48.jar</systemPath>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons-logging.version}</version>
+				<scope>system</scope>
+				<systemPath>${env.DEVTOOLS}\ofwup-testing\lib\commons-logging-1.1.1.jar</systemPath>
+			</dependency>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng.version}</version>
+				<scope>system</scope>
+				<systemPath>${env.DEVTOOLS}\ofwup-testing\lib\testng-6.9.10.jar</systemPath>
+			</dependency>
+			<dependency>
+				<groupId>org.hsqldb</groupId>
+				<artifactId>hsqldb</artifactId>
+				<version>${hsqldb.version}</version>
+				<scope>system</scope>
+				<systemPath>${env.DEVTOOLS}\ofwup-testing\lib\hsqldb-2.4.jar</systemPath>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.beust</groupId>
+			<artifactId>jcommander</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- Java compiler setup -->
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<encoding>${charset.code}</encoding>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+				<!-- Generate WSDL source -->
+				<plugin>
+					<groupId>org.apache.cxf</groupId>
+					<artifactId>cxf-codegen-plugin</artifactId>
+					<version>${cxf-codegen-plugin.version}</version>
+				</plugin>
+				<!-- TestNg config -->
+				<plugin>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<suiteXmlFiles>
+							<suiteXmlFile>testng.xml</suiteXmlFile>
+						</suiteXmlFiles>
+						<argLine>
+							-javaagent:${env.DEVTOOLS}/jacoco-0.8.12/lib/jacocoagent.jar=destfile=${project.build.directory}/jacoco.exec
+							-Xmx${maxMemory}
+							-Dfile.encoding=${project.build.sourceEncoding}
+							${jvmArgSettings}
+							--add-opens java.base/java.lang=ALL-UNNAMED
+							--add-opens java.base/java.io=ALL-UNNAMED
+							--add-opens java.base/java.util=ALL-UNNAMED
+							--add-opens java.base/java.util.concurrent=ALL-UNNAMED
+							--add-opens java.base/java.util.concurrent.locks=ALL-UNNAMED
+							--add-opens java.base/sun.util.calendar=ALL-UNNAMED
+							--add-opens java.base/sun.util.concurrent.locks=ALL-UNNAMED
+							--add-opens java.base/java.time=ALL-UNNAMED
+							--add-opens java.base/java.time.zone=ALL-UNNAMED
+							--add-opens java.base/sun.nio.fs=ALL-UNNAMED
+							--add-opens java.base/jdk.internal.reflect=ALL-UNNAMED
+							--add-opens java.base/java.text=ALL-UNNAMED
+							--add-opens java.base/java.lang.reflect=ALL-UNNAMED
+							--add-exports java.base/sun.security.jca=ALL-UNNAMED
+							--add-opens java.base/java.math=ALL-UNNAMED
+						</argLine>
+					</configuration>
+				</plugin>
+				<!-- Checkstyle config -->
+				<plugin>
+					<artifactId>maven-checkstyle-plugin</artifactId>
+					<version>${maven-checkstyle-plugin.version}</version>
+					<configuration>
+						<configLocation>${project.parent.basedir}/checkstyle/crif-checkstyle-v1.0.xml</configLocation>
+						<propertiesLocation>${project.parent.basedir}/checkstyle/sourceqa.properties</propertiesLocation>
+						<propertyExpansion>
+							project.basedir=${project.parent.basedir}
+							OFWUP_PROJECT_ENVIRONMENT=${env.OFWUP_PROJECT_ENVIRONMENT}
+						</propertyExpansion>
+						<consoleOutput>true</consoleOutput>
+						<failsOnError>true</failsOnError>
+						<!-- <violationSeverity>warning</violationSeverity> -->
+						<includeTestSourceDirectory>true</includeTestSourceDirectory>
+						<includes>**/*.java,**/*.xml,**/*.sql,**/*.conf,**/*.properties</includes>
+					</configuration>
+					<executions>
+						<execution>
+							<id>checkstyle-check</id>
+							<phase>validate</phase>
+							<goals>
+								<goal>check</goal>
+								<!-- Add checkstyle goal to generate reports -->
+								<goal>checkstyle</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- SonarQube check -->
+				<plugin>
+					<groupId>org.jacoco</groupId>
+					<artifactId>jacoco-maven-plugin</artifactId>
+					<version>${jacoco-maven-plugin.version}</version>
+					<executions>
+						<!-- Prepare JaCoCo runtime agent -->
+						<execution>
+							<goals>
+								<goal>prepare-agent</goal>
+							</goals>
+						</execution>
+						<!-- Generate reports after unit tests -->
+						<execution>
+							<id>report</id>
+							<phase>test</phase>
+							<goals>
+								<goal>report</goal>
+							</goals>
+							<configuration>
+								<!-- Output directory for the JaCoCo report -->
+								<outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+				<!-- Release config -->
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${maven-release-plugin.version}</version>
+				</plugin>
+				<!-- Generate resource bundle -->
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>${exec-maven-plugin.version}</version>
+				</plugin>
+				<!-- Maven WAR Plugin -->
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven-war-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
