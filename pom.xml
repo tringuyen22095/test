@@ -1,15 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<!-- Project information -->
 	<groupId>crif</groupId>
 	<artifactId>aml-services</artifactId>
-	<version>${revision}</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>Parent</name>
 	<packaging>pom</packaging>
+
+	<!-- Repository information -->
+    <repositories>
+        <repository>
+            <id>crif-release-repository</id>
+            <url>https://nexus.td.infra.sys/repository/crif-releases/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>crif-release-repository</id>
+            <url>https://nexus.td.infra.sys/repository/crif-releases/</url>
+        </pluginRepository>
+    </pluginRepositories>
+    <distributionManagement>
+        <repository>
+            <id>crif-release-repository</id>
+            <url>https://nexus.td.infra.sys/repository/crif-releases/</url>
+        </repository>
+    </distributionManagement>
+
+    <!-- SCM Information -->
+	<scm>
+		<connection>scm:git:https://github.com/tringuyen22095/test.git</connection>
+		<url>https://github.com/tringuyen22095/test.git</url>
+		<developerConnection>scm:git:https://github.com/tringuyen22095/test.git</developerConnection>
+		<tag>aml-services-0.0.1</tag>
+	</scm>
 
 	<!-- List module -->
 	<modules>
@@ -21,8 +47,6 @@
 
 	<!-- List properties -->
 	<properties>
-		<revision>0.0.1-SNAPSHOT</revision>
-
 		<java.version>17</java.version>
 		<charset.code>ISO-8859-1</charset.code>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
