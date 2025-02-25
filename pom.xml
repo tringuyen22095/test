@@ -5,7 +5,7 @@
 	<!-- Project information -->
 	<groupId>crif</groupId>
 	<artifactId>parent-aml-services</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<name>parent-aml-services</name>
 	<packaging>pom</packaging>
 
