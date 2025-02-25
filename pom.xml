@@ -5,7 +5,7 @@
 	<!-- Project information -->
 	<groupId>crif</groupId>
 	<artifactId>aml-services</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Parent</name>
 	<packaging>pom</packaging>
 
@@ -34,7 +34,7 @@
 		<connection>scm:git:https://github.com/tringuyen22095/test.git</connection>
 		<url>https://github.com/tringuyen22095/test.git</url>
 		<developerConnection>scm:git:https://github.com/tringuyen22095/test.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>aml-services_0.0.1-SNAPSHOT</tag>
 	</scm>
 
 	<!-- List module -->
