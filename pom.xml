@@ -34,16 +34,18 @@
 		<connection>scm:git:https://github.com/tringuyen22095/test.git</connection>
 		<url>https://github.com/tringuyen22095/test.git</url>
 		<developerConnection>scm:git:https://github.com/tringuyen22095/test.git</developerConnection>
-		<tag>aml-services-0.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<!-- List module -->
+	<!--
 	<modules>
 		<module>aml-shared-services-impl</module>
 		<module>aml-job-services-impl</module>
 		<module>aml-business-services-impl</module>
 		<module>aml-esb</module>
 	</modules>
+	-->
 
 	<!-- List properties -->
 	<properties>
@@ -70,6 +72,7 @@
 		<maven-release-plugin.version>3.0.1</maven-release-plugin.version>
 		<exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 		<maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+		<maven-jar-plugin.version>3.4.0</maven-jar-plugin.version>
 		<maven-surefire-report-plugin.version>3.3.1</maven-surefire-report-plugin.version>
 	</properties>
 
@@ -181,11 +184,10 @@
 					<artifactId>maven-checkstyle-plugin</artifactId>
 					<version>${maven-checkstyle-plugin.version}</version>
 					<configuration>
-						<configLocation>${project.parent.basedir}/checkstyle/crif-checkstyle-v1.0.xml</configLocation>
-						<propertiesLocation>${project.parent.basedir}/checkstyle/sourceqa.properties</propertiesLocation>
+						<configLocation>${project.basedir}/checkstyle/crif-checkstyle-v1.0.xml</configLocation>
+						<propertiesLocation>${project.basedir}/checkstyle/sourceqa.properties</propertiesLocation>
 						<propertyExpansion>
-							project.basedir=${project.parent.basedir}
-							OFWUP_PROJECT_ENVIRONMENT=${env.OFWUP_PROJECT_ENVIRONMENT}
+							project.basedir=${project.basedir}
 						</propertyExpansion>
 						<consoleOutput>true</consoleOutput>
 						<failsOnError>true</failsOnError>
@@ -235,6 +237,12 @@
 				<plugin>
 					<artifactId>maven-release-plugin</artifactId>
 					<version>${maven-release-plugin.version}</version>
+					<configuration>
+						<autoVersionSubmodules>true</autoVersionSubmodules>
+						<scmCommentPrefix />
+						<scmReleaseCommitComment>Release prepared</scmReleaseCommitComment>
+						<scmDevelopmentCommitComment>Prepare for next development iteration</scmDevelopmentCommitComment>
+					</configuration>
 				</plugin>
 				<!-- Generate resource bundle -->
 				<plugin>
@@ -247,7 +255,25 @@
 					<artifactId>maven-war-plugin</artifactId>
 					<version>${maven-war-plugin.version}</version>
 				</plugin>
+				<!-- Maven JAR Plugin -->
+				<plugin>
+				   <artifactId>maven-jar-plugin</artifactId>
+				   <version>${maven-jar-plugin.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
+		<plugins>
+			<!-- build parent JAR file -->
+			<plugin>
+			   <artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<!-- Release config -->
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagNameFormat>${project.artifactId}_${project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
