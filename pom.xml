@@ -5,7 +5,7 @@
 	<!-- Project information -->
 	<groupId>crif</groupId>
 	<artifactId>parent-aml-services</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>parent-aml-services</name>
 	<packaging>pom</packaging>
 
@@ -38,14 +38,12 @@
 	</scm>
 
 	<!-- List module -->
-	<!--
 	<modules>
 		<module>aml-shared-services-impl</module>
 		<module>aml-job-services-impl</module>
 		<module>aml-business-services-impl</module>
 		<module>aml-esb</module>
 	</modules>
-	-->
 
 	<!-- List properties -->
 	<properties>
