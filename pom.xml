@@ -4,9 +4,9 @@
 
 	<!-- Project information -->
 	<groupId>crif</groupId>
-	<artifactId>aml-services</artifactId>
+	<artifactId>parent-aml-services</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
-	<name>Parent</name>
+	<name>parent-aml-services</name>
 	<packaging>pom</packaging>
 
 	<!-- Repository information -->
@@ -130,6 +130,7 @@
 	</dependencies>
 
 	<build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
 		<pluginManagement>
 			<plugins>
 				<!-- Java compiler setup -->
