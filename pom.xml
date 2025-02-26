@@ -266,13 +266,6 @@
 			<plugin>
 			   <artifactId>maven-jar-plugin</artifactId>
 			</plugin>
-			<!-- Release config -->
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-				<configuration>
-					<tagNameFormat>${project.artifactId}_${project.version}</tagNameFormat>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 </project>
