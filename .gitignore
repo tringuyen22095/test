@@ -1,7 +1,2 @@
-aml**/**/*
-CRIF**/**/*
-sample/**/*
-template/**/*
-logs/**/*
-checkstyle/**/*
-jar/**/*
+**/target/**/*
+**/bin/**/*
