@@ -37,14 +37,6 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<!-- List module -->
-	<modules>
-		<module>aml-shared-services-impl</module>
-		<module>aml-job-services-impl</module>
-		<module>aml-business-services-impl</module>
-		<module>aml-esb</module>
-	</modules>
-
 	<!-- List properties -->
 	<properties>
 		<java.version>17</java.version>
