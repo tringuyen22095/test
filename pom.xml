@@ -5,7 +5,7 @@
 	<!-- Project information -->
 	<groupId>crif</groupId>
 	<artifactId>parent-aml-services</artifactId>
-	<version>0.0.7-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>parent-aml-services</name>
 	<packaging>pom</packaging>
 
@@ -28,14 +28,6 @@
             <url>https://nexus.td.infra.sys/repository/crif-releases/</url>
         </repository>
     </distributionManagement>
-
-    <!-- SCM Information -->
-	<scm>
-		<connection>scm:git:https://github.com/tringuyen22095/test.git</connection>
-		<url>https://github.com/tringuyen22095/test.git</url>
-		<developerConnection>scm:git:https://github.com/tringuyen22095/test.git</developerConnection>
-		<tag>HEAD</tag>
-	</scm>
 
 	<!-- List properties -->
 	<properties>
@@ -253,13 +245,5 @@
 				</plugin>
 			</plugins>
 		</pluginManagement>
-		<plugins>
-			<plugin>
-			   <artifactId>maven-jar-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-release-plugin</artifactId>
-			</plugin>
-		</plugins>
 	</build>
 </project>
